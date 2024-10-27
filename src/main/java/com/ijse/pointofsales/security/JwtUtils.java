@@ -4,22 +4,22 @@ import java.security.Key;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
-@Configuration
+@Component
 public class JwtUtils {
     @Value("${app.secret}")
     private String secret;
 
     private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)); // ket for signing
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)); // key for signing
     }
 
     public String generateJwtToken(Authentication authentication) {
@@ -41,5 +41,9 @@ public class JwtUtils {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public String getUserNameFromJwt(String token) {
+        return Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(token).getBody().getSubject();
     }
 }
