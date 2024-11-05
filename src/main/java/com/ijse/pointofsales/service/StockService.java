@@ -12,9 +12,9 @@ public interface StockService {
 
     ItemStock createStock(ItemStock stock);
 
-    ItemStock getStockByItem(Long id);
+    ItemStock getStockByItem(Long itemCode);
 
-    ItemStock updateStock(Long id, ItemStock stock);
+    ItemStock updateStock(Long itemCode, ItemStock stock);
 
-    void deleteStock(Long id);
+    void deleteStock(Long itemCode);
 }

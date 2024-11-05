@@ -25,13 +25,13 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public ItemStock getStockByItem(Long id) {
-        return stockRepository.findById(id).orElse(null);
+    public ItemStock getStockByItem(Long itemCode) {
+        return stockRepository.findById(itemCode).orElse(null);
     }
 
     @Override
-    public ItemStock updateStock(Long id, ItemStock stock) {
-        ItemStock existingStock = stockRepository.findById(id).orElse(null);
+    public ItemStock updateStock(Long itemCode, ItemStock stock) {
+        ItemStock existingStock = stockRepository.findById(itemCode).orElse(null);
         if (existingStock != null) {
             return stockRepository.save(stock);
         } else {
@@ -40,8 +40,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void deleteStock(Long id) {
-        stockRepository.deleteById(id);
+    public void deleteStock(Long itemCode) {
+        stockRepository.deleteById(itemCode);
     }
 
 }

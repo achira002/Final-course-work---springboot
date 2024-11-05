@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderRequestDto {
+public class InvoiceRequestDto {
     private List<Long> itemIds;
-    private int orderQty;
+    private List<Integer> itemQty;
 }

@@ -42,6 +42,7 @@ public class OrderController {
         order.setTotalPrice(0.0);
         List<Items> orderedItems = new ArrayList<>();
 
+        
         itemIds.forEach(itemId -> {
             Items item = itemService.getItemById(itemId);
 

@@ -10,33 +10,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "orders")
-public class Order {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
-    private LocalDateTime orderDateTime;
-    private Double totalPrice;
+    private Long invNo;
+    private LocalDateTime invoiceDate;
 
     @PrePersist
     protected void onCreate() {
-        this.orderDateTime = LocalDateTime.now();
+        this.invoiceDate = LocalDateTime.now();
     }
 
     @ManyToMany
-    @JoinTable(name = "order_product", 
-    joinColumns = @JoinColumn(name = "orderId"), 
-    inverseJoinColumns = @JoinColumn(name = "itemCode")
-    )
-    private List<Items> orderItems;
+    @JoinTable(name = "Invoiced_Items", joinColumns = @JoinColumn(name = "invNo"), inverseJoinColumns = @JoinColumn(name = "itemCode"))
+    private List<Items> invoicedItems;
+
+    @ManyToOne
+    @JoinColumn(name = "itemCode")
+    private ItemStock stock;
+
+    private Double totalPrice;
 
 }

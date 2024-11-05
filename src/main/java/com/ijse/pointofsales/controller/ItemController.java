@@ -75,7 +75,6 @@ public class ItemController {
 
         ItemCategories itemCategory = categoryService.getCategoryById(itemRequestDto.getCategoryId());
         item.setCategory(itemCategory);
-
         // Stock stock = stockService.getStockById(itemRequestDto.getStock());
         // item.setStock(stock);
 

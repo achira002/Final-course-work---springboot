@@ -40,4 +40,8 @@ public class Items {
     @ManyToMany(mappedBy = "orderItems")
     private List<Order> orders;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "items")
+    private List<Invoice> invoice;
+
 }
